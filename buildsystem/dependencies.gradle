@@ -1,0 +1,153 @@
+ext {
+    // Release
+    compileSdkVersion = 30
+    buildToolsVersion = "30.0.2"
+    applicationId = "com.potatocandie.cleanarchsample"
+    minSdkVersion = 23
+    targetSdkVersion = 30
+    versionCode = 1
+    versionName = "1.0"
+
+    // Gradle
+    androidGradlePlugin = "4.1.1"
+
+    // Kotlin
+    kotlin = "1.4.21"
+
+    // Android
+    androidX = "1.3.2"
+    appCompat = "1.2.0"
+    constraintLayout = "2.0.4"
+
+    // UI
+    materialDesign = "1.2.1"
+    recyclerView = "1.1.0"
+    cardView = "1.0.0"
+
+    // Dependency Injection
+    hiltAndroid = "2.28-alpha"
+    hiltViewModel = "1.0.0-alpha02"
+
+    // Network
+    retrofit = "2.9.0"
+    loggingInterceptor = "4.9.0"
+
+    // Room
+    room = "2.2.6"
+
+    // ReactiveX
+    rxJava = "3.0.0"
+
+    // Lifecycle
+    lifeCycle = "2.2.0"
+
+    // Others
+    leakCanary = "2.5"
+    viewBinder = "0.1.1"
+
+    // Testing
+    junit = "4.13.1"
+    extJunit = "1.1.2"
+    espresso = "3.3.0"
+
+    def kotlin = [
+            stdLib:      [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin],
+    ]
+
+    def androidLibs = [
+            androidCore:        [group: 'androidx.core', name: 'core-ktx', version: androidX],
+            appCompat:          [group: 'androidx.appcompat', name: 'appcompat', version: appCompat],
+            constraintLayout:   [group: 'androidx.constraintlayout', name: 'constraintlayout', version: constraintLayout]
+    ]
+
+    def uiLibs = [
+            materialDesign:      [group: 'com.google.android.material', name: 'material', version: materialDesign],
+            cardView:            [group: 'androidx.cardview', name: 'cardview', version: cardView],
+            recyclerView:        [group: 'androidx.recyclerview', name: 'recyclerview', version: recyclerView]
+    ]
+
+    def dependencyInjectionLibs = [
+            android:          [group: 'com.google.dagger', name: 'hilt-android', version: hiltAndroid],
+            androidCompiler:  [group: 'com.google.dagger', name: 'hilt-android-compiler', version: hiltAndroid],
+            viewModel:        [group: 'androidx.hilt', name: 'hilt-lifecycle-viewmodel', version: hiltViewModel],
+            compiler:         [group: 'androidx.hilt', name: 'hilt-compiler', version: hiltViewModel],
+    ]
+
+    def networkLibs = [
+            retrofit:            [group: 'com.squareup.retrofit2', name: 'retrofit', version: retrofit],
+            gsonConverter:       [group: 'com.squareup.retrofit2', name: 'converter-gson', version: retrofit],
+            rxJavaAdapter:       [group: 'com.squareup.retrofit2', name: 'adapter-rxjava3', version: retrofit],
+            loggingInterceptor:  [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: loggingInterceptor]
+    ]
+
+    def roomLibs = [
+            runtime:          [group: 'androidx.room', name: 'room-runtime', version: room],
+            compiler:         [group: 'androidx.room', name: 'room-compiler', version: room],
+            rxjava2:         [group: 'androidx.room', name: 'room-rxjava2', version: room],
+    ]
+
+    def reactiveXLibs = [
+            rxJava:          [group: 'io.reactivex.rxjava3', name: 'rxjava', version: rxJava],
+            rxAndroid:       [group: 'io.reactivex.rxjava3', name: 'rxandroid', version: rxJava]
+    ]
+
+    def lifeCycleLibs = [
+            viewModel:      [group: 'androidx.lifecycle', name: 'lifecycle-viewmodel-ktx', version: lifeCycle],
+            liveData:       [group: 'androidx.lifecycle', name: 'lifecycle-livedata-ktx', version: lifeCycle]
+    ]
+
+    def othersLibs = [
+            leakCanary:     [group: 'com.squareup.leakcanary', name: 'leakcanary-android', version: leakCanary],
+            viewBinder:     [group: 'com.github.potatocandie', name: 'viewBinder', version: viewBinder]
+    ]
+
+    def testingLibs = [
+            junit:          [group: 'junit', name: 'junit', version: junit],
+            extJunit:       [group: 'androidx.test.ext', name: 'junit', version: extJunit],
+            espresso:       [group: 'androidx.test.espresso', name: 'espresso-core', version: espresso]
+    ]
+
+    dataDependencies = [
+            [configuration: "implementation", dependency: project(':domain')],
+            [configuration: "api", dependency: networkLibs.retrofit],
+            [configuration: "api", dependency: networkLibs.gsonConverter],
+            [configuration: "api", dependency: networkLibs.rxJavaAdapter],
+            [configuration: "api", dependency: networkLibs.loggingInterceptor],
+            [configuration: "api", dependency: roomLibs.runtime],
+            [configuration: "api", dependency: roomLibs.rxjava2],
+            [configuration: "annotationProcessor", dependency: roomLibs.compiler],
+            [configuration: "kapt", dependency: roomLibs.compiler],
+            [configuration: "implementation", dependency: reactiveXLibs.rxJava],
+            [configuration: "testImplementation", dependency: testingLibs.junit]
+    ]
+
+    domainDependencies = [
+            [configuration: "implementation", dependency: reactiveXLibs.rxJava],
+            [configuration: "testImplementation", dependency: testingLibs.junit]
+    ]
+
+    presentationDependencies = [
+            [configuration: "implementation", dependency: project(':data')],
+            [configuration: "implementation", dependency: project(':domain')],
+            [configuration: "implementation", dependency: kotlin.stdLib],
+            [configuration: "implementation", dependency: androidLibs.androidCore],
+            [configuration: "implementation", dependency: androidLibs.appCompat],
+            [configuration: "implementation", dependency: androidLibs.constraintLayout],
+            [configuration: "implementation", dependency: uiLibs.materialDesign],
+            [configuration: "implementation", dependency: uiLibs.recyclerView],
+            [configuration: "implementation", dependency: uiLibs.cardView],
+            [configuration: "implementation", dependency: dependencyInjectionLibs.android],
+            [configuration: "kapt", dependency: dependencyInjectionLibs.androidCompiler],
+            [configuration: "kapt", dependency: dependencyInjectionLibs.compiler],
+            [configuration: "implementation", dependency: dependencyInjectionLibs.viewModel],
+            [configuration: "implementation", dependency: reactiveXLibs.rxJava],
+            [configuration: "implementation", dependency: reactiveXLibs.rxAndroid],
+            [configuration: "implementation", dependency: lifeCycleLibs.viewModel],
+            [configuration: "implementation", dependency: lifeCycleLibs.liveData],
+            [configuration: "debugImplementation", dependency: othersLibs.leakCanary],
+            [configuration: "implementation", dependency: othersLibs.viewBinder],
+            [configuration: "testImplementation", dependency: testingLibs.junit],
+            [configuration: "androidTestImplementation", dependency: testingLibs.extJunit],
+            [configuration: "androidTestImplementation", dependency: testingLibs.espresso]
+    ]
+}

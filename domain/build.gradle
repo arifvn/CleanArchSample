@@ -1,0 +1,10 @@
+apply plugin: 'kotlin'
+
+targetCompatibility = 1.8
+sourceCompatibility = 1.8
+
+dependencies {
+    rootProject.domainDependencies.each {
+        add(it.configuration, it.dependency, it.options)
+    }
+}
